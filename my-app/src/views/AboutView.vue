@@ -1,106 +1,47 @@
 <script setup lang="ts">
-import { inject } from 'vue'
-import { RouterLink } from 'vue-router'
-import type { Ref } from 'vue'
+import { useTheme } from 'vuetify'
 
-const isDark = inject<Ref<boolean>>('isDark')!
-const toggleTheme = inject<() => void>('toggleTheme')!
+const theme = useTheme()
+
+function toggleTheme() {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
 </script>
 
 <template>
-  <main class="page">
-    <div class="card">
-      <button
-        class="theme-toggle"
-        @click="toggleTheme"
-        :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-      >
-        {{ isDark ? '☀️' : '🌙' }}
-      </button>
+  <v-main>
+    <v-container class="fill-height" fluid>
+      <v-row justify="center" align="center" class="fill-height">
+        <v-col cols="12" style="max-width: 480px">
+          <v-card rounded="xl" elevation="8" class="pa-6 pa-md-8 text-center">
 
-      <h1 class="title">About Me</h1>
+            <div class="d-flex justify-end mb-n2">
+              <v-btn
+                :icon="theme.global.current.value.dark ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+                variant="text"
+                @click="toggleTheme"
+                :aria-label="theme.global.current.value.dark ? 'Switch to light mode' : 'Switch to dark mode'"
+              />
+            </div>
 
-      <p class="body-text">
-        Hi, I'm Adi Fine — a developer, creator, and builder with a passion for
-        crafting clean, purposeful digital experiences.
-      </p>
-      <p class="body-text">
-        I love working across the stack, from designing interfaces to shipping
-        full-featured web apps.
-      </p>
+            <h1 class="text-h5 font-weight-bold mb-6">About Me</h1>
 
-      <RouterLink to="/" class="back-link">← Back</RouterLink>
-    </div>
-  </main>
+            <p class="text-body-1 text-medium-emphasis mb-4">
+              Hi, I'm Adi Fine — a developer, creator, and builder with a passion for
+              crafting clean, purposeful digital experiences.
+            </p>
+            <p class="text-body-1 text-medium-emphasis mb-6">
+              I love working across the stack, from designing interfaces to shipping
+              full-featured web apps.
+            </p>
+
+            <v-btn variant="text" size="small" to="/" class="text-medium-emphasis">
+              ← Back
+            </v-btn>
+
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-main>
 </template>
-
-<style scoped>
-.page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-}
-
-.card {
-  width: 100%;
-  max-width: 480px;
-  background: var(--card-bg);
-  border-radius: 1.5rem;
-  padding: 2.5rem 2rem;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: var(--toggle-bg);
-  border: none;
-  border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition:
-    background 0.3s,
-    transform 0.2s;
-}
-
-.theme-toggle:hover {
-  transform: scale(1.1);
-}
-
-.title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 1.25rem;
-}
-
-.body-text {
-  color: var(--subtext);
-  font-size: 0.975rem;
-  line-height: 1.7;
-  margin-bottom: 1rem;
-}
-
-.back-link {
-  display: inline-block;
-  margin-top: 1.25rem;
-  color: var(--subtext);
-  font-size: 0.875rem;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.back-link:hover {
-  color: var(--text);
-}
-</style>
