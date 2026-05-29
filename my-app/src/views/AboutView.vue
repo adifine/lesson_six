@@ -18,18 +18,18 @@ const toggleTheme = inject<() => void>('toggleTheme')!
         {{ isDark ? '☀️' : '🌙' }}
       </button>
 
-      <div class="avatar"></div>
+      <h1 class="title">About Me</h1>
 
-      <h1 class="name">Adi Fine</h1>
-      <p class="tagline">Developer · Creator · Builder</p>
+      <p class="body-text">
+        Hi, I'm Adi Fine — a developer, creator, and builder with a passion for
+        crafting clean, purposeful digital experiences.
+      </p>
+      <p class="body-text">
+        I love working across the stack, from designing interfaces to shipping
+        full-featured web apps.
+      </p>
 
-      <div class="links">
-        <a href="#" class="link-btn">Portfolio</a>
-        <a href="https://linkedin.com/in/adifine" class="link-btn" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="mailto:adi@example.com" class="link-btn">Email</a>
-      </div>
-
-      <RouterLink to="/about" class="about-link">About me →</RouterLink>
+      <RouterLink to="/" class="back-link">← Back</RouterLink>
     </div>
   </main>
 </template>
@@ -77,65 +77,30 @@ const toggleTheme = inject<() => void>('toggleTheme')!
   transform: scale(1.1);
 }
 
-.avatar {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  background: var(--avatar-bg);
-  margin: 0 auto 1.5rem;
-  border: 3px solid var(--btn-hover-bg);
-}
-
-.name {
+.title {
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 0.4rem;
+  margin-bottom: 1.25rem;
 }
 
-.tagline {
+.body-text {
   color: var(--subtext);
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
+  font-size: 0.975rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
 }
 
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.link-btn {
-  display: block;
-  padding: 0.85rem 1.5rem;
-  background: var(--btn-bg);
-  color: var(--btn-text);
-  text-decoration: none;
-  border-radius: 0.75rem;
-  font-weight: 600;
-  font-size: 1rem;
-  transition:
-    background 0.2s,
-    transform 0.2s,
-    box-shadow 0.2s;
-}
-
-.link-btn:hover {
-  background: var(--btn-hover-bg);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-}
-
-.about-link {
+.back-link {
   display: inline-block;
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
   color: var(--subtext);
   font-size: 0.875rem;
   text-decoration: none;
   transition: color 0.2s;
 }
 
-.about-link:hover {
+.back-link:hover {
   color: var(--text);
 }
 </style>
